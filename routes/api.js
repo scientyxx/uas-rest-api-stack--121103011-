@@ -2,21 +2,21 @@
 
 const express = require('express');
 const router = express.Router();
-const { getAllUsers, getUserById, createUser, updateUser, deleteUser } = require('../controllers/crudController');
+const crudController = require('../controllers/crudController');
 
-// GET all users
-router.get('/users', getAllUsers);
+// Create
+router.post('/users', crudController.createUser);
 
-// GET user by ID
-router.get('/users/:id', getUserById);
+// Read All
+router.get('/users', crudController.getAllUsers);
 
-// POST create new user
-router.post('/users', createUser);
+// Read One
+router.get('/users/:id', crudController.getUserById);
 
-// PUT update user by ID
-router.put('/users/:id', updateUser);
+// Update
+router.put('/users/:id', crudController.updateUser);
 
-// DELETE user by ID
-router.delete('/users/:id', deleteUser);
+// Delete
+router.delete('/users/:id', crudController.deleteUser);
 
 module.exports = router;

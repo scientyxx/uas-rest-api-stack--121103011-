@@ -1,17 +1,27 @@
+  // app.js
 const express = require('express');
-const app = express();
-const apiRoutes = require('./routes/api');  // Ubah ini sesuai dengan lokasi sebenarnya file api.js Anda
+const { Sequelize, DataTypes } = require('sequelize');
+const apiRouter = require('./routes/api');
+const sequelize = require('./db'); // Sesuaikan dengan lokasi file inisialisasi Sequelize
 
+const app = express();
+const port = process.env.PORT || 3000;
+
+// Middleware lainnya
 // Contoh route
 app.get('/', (req, res) => {
   res.send('Hello, World!');
 });
+// Mount router
+app.use('/api', apiRouter);
 
-// Gunakan rute API
-app.use('/api', apiRoutes);
+app.use((req, res, next) => {
+  req.sequelize = sequelize;
+  next();
+});
 
-// Atur server untuk mendengarkan port tertentu
-const port = 3000;
+// Middleware lainnya
+
 app.listen(port, () => {
-  console.log(`Server berjalan di http://localhost:${port}`);
+  console.log(`Server is running on port ${port}`);
 });
