@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+  database:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: example_password
+      MYSQL_DATABASE: sample_db
+      MYSQL_USER: sample_user
+      MYSQL_PASSWORD: sample_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - db-data:/var/lib/mysql
+
+  node-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - database
+    links:
+      - database
+
+volumes:
+  db-data:
