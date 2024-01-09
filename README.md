@@ -19,9 +19,11 @@ cd uas-rest-api-stack--121103011-
 ```
 ## Mengatur REST API dan Database
 
+### Atur API
+
 Memasukkan file Dockerfile yang sudah dibuat sebelumnya
 
-## Atur Konfigurasi Database:
+### Atur Konfigurasi Database:
 
 Membuat docker-compose.yaml
 
@@ -45,7 +47,7 @@ Docker Compose akan membuat dan mengkonfigurasi kontainer. Tunggu hingga proses 
 curl http://localhost:3000/users
 ```
 
-## Akses REST API dari luar kontainer:
+### Akses REST API dari luar kontainer:
 
  Buka browser atau gunakan alat seperti Postman untuk mengakses 
 
@@ -59,7 +61,7 @@ Setelah menjalankan Docker Compose, Anda dapat melakukan operasi CRUD pada REST 
 ### Tambah Data (Create):
 
 ```bash
-curl -X POST -H "Content-Type: application/json" -d '{"name": "John Doe", "email": "john@example.com"}' http://localhost:3000/users
+curl -X POST http://localhost:3000/users
 ```
 
 ### Dapatkan Data (Read):
@@ -71,16 +73,16 @@ curl http://localhost:3000/users
 ### Perbarui Data (Update):
 
 ```bash
-curl -X PUT -H "Content-Type: application/json" -d '{"name": "Updated Name", "email": "updated.email@example.com"}' http://localhost:3000/users/1
+curl  http://localhost:3000/users/:id
 ```
 
 ### Hapus Data (Delete):
 
 ```bash
-curl -X DELETE http://localhost:3000/users/1
+curl -X DELETE http://localhost:3000/users/:id
 ```
 
-## Memberhentikan dan Membersihkan
+### Memberhentikan dan Membersihkan
 
 Untuk memberhentikan dan membersihkan kontainer:
 
